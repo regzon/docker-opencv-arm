@@ -23,21 +23,22 @@ RUN set -e; \
     apt-get install -y --no-install-recommends \
         # Build utils
         cmake \
+        git \
         pkg-config \
         unzip \
         wget \
-        # OpenCV dependencies
-        libjpeg-dev \
-        libpng-dev \
-        libtiff-dev \
+        # Required dependencies
         libavcodec-dev \
         libavformat-dev \
         libswscale-dev \
-        libv4l-dev \
-        libxvidcore-dev \
-        libx264-dev \
-        libatlas-base-dev \
-        gfortran; \
+        # Optional dependencies
+        python-numpy \
+        libtbb2 \
+        libtbb-dev \
+        libjpeg-dev \
+        libpng-dev \
+        libtiff-dev \
+        libdc1394-22-dev; \
     # Clear apt cache
     rm -rf /var/lib/apt/lists/*
 
