@@ -81,7 +81,6 @@ RUN set -e; \
         -D BUILD_NEW_PYTHON_SUPPORT=ON \
         # Ignore all unnecessary stages
         -D BUILD_opencv_apps=OFF \
-        -D BUILD_SHARED_LIBS=OFF \
         -D BUILD_EXAMPLES=OFF \
         -D INSTALL_C_EXAMPLES=OFF \
         -D INSTALL_PYTHON_EXAMPLES=OFF \
