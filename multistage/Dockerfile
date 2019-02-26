@@ -6,29 +6,36 @@ FROM arm32v7/python:${PYTHON_VERSION_SHORT}-stretch
 
 ARG DEBIAN_FRONTEND=noninteractive
 
+# Installing build tools and dependencies.
+# More about dependencies there: https://docs.opencv.org/4.0.0/d2/de6/tutorial_py_setup_in_ubuntu.html
 RUN set -e; \
     apt-get update; \
     apt-get install -y --no-install-recommends \
         apt-utils \
         build-essential; \
     apt-get install -y --no-install-recommends \
-        # Build utils
-        cmake \
-        git \
-        pkg-config \
+        # Downloading utils
         unzip \
         wget \
+        # Build utils
+        cmake \
+        gcc \
         # Required dependencies
+        python-numpy \
         libavcodec-dev \
         libavformat-dev \
         libswscale-dev \
+        libgstreamer-plugins-base1.0-dev \
         # Optional dependencies
-        python-numpy \
         libtbb2 \
         libtbb-dev \
         libjpeg-dev \
         libpng-dev \
+        libopenexr-dev \
         libtiff-dev \
+        libwebp-dev \
+        # Video device drivers
+        libv4l-dev \
         libdc1394-22-dev; \
     # Clear apt cache
     rm -rf /var/lib/apt/lists/*
@@ -60,7 +67,6 @@ RUN set -e; \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-$OPENCV_VERSION/modules \
         -D CMAKE_INSTALL_PREFIX=/opt/opencv \
-        -D PYTHON2_EXECUTABLE=$(which python${PYTHON_VERSION}) \
         -D PYTHON3_EXECUTABLE=$(which python${PYTHON_VERSION}) \
         -D PYTHON_INCLUDE_DIR=$(python${PYTHON_VERSION} -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
         -D PYTHON_PACKAGES_PATH=$(python${PYTHON_VERSION} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
