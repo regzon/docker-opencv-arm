@@ -80,14 +80,14 @@ RUN set -e; \
         -D BUILD_PYTHON_SUPPORT=ON \
         -D BUILD_NEW_PYTHON_SUPPORT=ON \
         # Ignore all unnecessary stages
-        -D BUILD_opencv_apps \
-        -D BUILD_SHARED_LIBS \
+        -D BUILD_opencv_apps=OFF \
+        -D BUILD_SHARED_LIBS=OFF \
         -D BUILD_EXAMPLES=OFF \
         -D INSTALL_C_EXAMPLES=OFF \
         -D INSTALL_PYTHON_EXAMPLES=OFF \
         -D BUILD_DOCS=OFF \
         -D BUILD_PERF_TESTS=OFF \
-        -D BUILD_TESTS \
+        -D BUILD_TESTS=OFF \
         ..; \
     make -j$CPU_CORES; \
     make install; \
