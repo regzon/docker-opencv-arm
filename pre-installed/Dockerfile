@@ -104,7 +104,7 @@ RUN set -e; \
     # Clean up
     make clean; \
     cd /tmp; \
-    rm -rf /tmp/*; \
+    rm -rf /tmp/*
 
 CMD ["/bin/bash"]
 
