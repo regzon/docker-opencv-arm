@@ -76,15 +76,27 @@ RUN set -e; \
     cmake -D CMAKE_BUILD_TYPE=RELEASE \
         -D OPENCV_EXTRA_MODULES_PATH=/tmp/opencv_contrib-$OPENCV_VERSION/modules \
         -D CMAKE_INSTALL_PREFIX=/opt/opencv \
-        -D PYTHON3_EXECUTABLE=$(which python${PYTHON_VERSION}) \
-        -D PYTHON_INCLUDE_DIR=$(python${PYTHON_VERSION} -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())") \
-        -D PYTHON_PACKAGES_PATH=$(python${PYTHON_VERSION} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())") \
         # Build without GUI support
         -D WITH_QT=OFF \
         -D WITH_GTK=OFF \
+        # Build without GPU support
+        -D WITH_OPENCL=OFF \
+        -D WITH_CUDA=OFF \
+        -D BUILD_opencv_gpu=OFF \
+        -D BUILD_opencv_gpuarithm=OFF \
+        -D BUILD_opencv_gpubgsegm=OFF \
+        -D BUILD_opencv_gpucodec=OFF \
+        -D BUILD_opencv_gpufeatures2d=OFF \
+        -D BUILD_opencv_gpufilters=OFF \
+        -D BUILD_opencv_gpuimgproc=OFF \
+        -D BUILD_opencv_gpulegacy=OFF \
+        -D BUILD_opencv_gpuoptflow=OFF \
+        -D BUILD_opencv_gpustereo=OFF \
+        -D BUILD_opencv_gpuwarping=OFF \
         # Build with python
-        -D BUILD_PYTHON_SUPPORT=ON \
-        -D BUILD_NEW_PYTHON_SUPPORT=ON \
+        -D BUILD_opencv_python3=ON \
+        -D BUILD_opencv_python2=OFF \
+        -D PYTHON_DEFAULT_EXECUTABLE=$(which python${PYTHON_VERSION}) \
         # Ignore all unnecessary stages
         -D BUILD_opencv_apps=OFF \
         -D BUILD_EXAMPLES=OFF \

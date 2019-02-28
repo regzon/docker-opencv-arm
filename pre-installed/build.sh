@@ -1,1 +1,1 @@
-docker build -t opencv-arm:4.0.0-py3.6 .
+docker build -t regzon/opencv-python-arm:4.0.0-py3.6 .
